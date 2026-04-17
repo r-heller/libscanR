@@ -1,0 +1,13 @@
+pandoc: 3.1.11
+pkgdown: 2.2.0
+pkgdown_sha: ~
+articles:
+  calibration-quantification: calibration-quantification.html
+  getting-started: getting-started.html
+  preprocessing-workflow: preprocessing-workflow.html
+  spatial-mapping: spatial-mapping.html
+  tissue-classification: tissue-classification.html
+last_built: 2026-04-17T15:39Z
+urls:
+  reference: https://r-heller.github.io/libscanR/reference
+  article: https://r-heller.github.io/libscanR/articles
