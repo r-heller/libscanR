@@ -108,6 +108,25 @@ reference:
       - ls_simulate_spectrum
       - ls_example_data
 
+  - title: "S3 Methods"
+    contents:
+      - c.libs_spectrum
+      - dim.libs_dataset
+      - dim.libs_spectrum
+      - length.libs_dataset
+      - length.libs_spectrum
+      - plot.libs_dataset
+      - plot.libs_spectrum
+      - predict.libs_calibration
+      - print.libs_calibration
+      - print.libs_dataset
+      - print.libs_spectrum
+      - "[.libs_dataset"
+      - "[.libs_spectrum"
+      - summary.libs_calibration
+      - summary.libs_dataset
+      - summary.libs_spectrum
+
 articles:
   - title: "Workflows"
     contents:
