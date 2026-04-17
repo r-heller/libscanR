@@ -1,0 +1,113 @@
+---
+title: "Calibration and Quantification"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Calibration and Quantification}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 4.5,
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+```{r}
+library(libscanR)
+```
+
+## From peak area to concentration
+
+A LIBS calibration converts measured peak area (or intensity ratio) to
+elemental concentration using a set of matrix-matched standards.
+
+### Synthetic calibration dataset
+
+```{r data}
+cal_ds <- ls_example_data("calibration")
+cal_ds
+conc <- cal_ds$sample_info$concentration
+unique(conc)
+```
+
+### Univariate calibration
+
+```{r univariate}
+cal <- ls_calibrate(cal_ds, element = "Ca", line_nm = 393.37,
+                    concentrations = conc, method = "univariate",
+                    verbose = FALSE)
+cal
+```
+
+### Visualize
+
+```{r plot}
+ls_plot_calibration(cal)
+```
+
+### Residual diagnostics
+
+```{r residuals}
+ls_plot_residuals(cal)
+```
+
+### Internal standard calibration
+
+When matrix effects are significant, normalize to a reference line:
+
+```{r internal}
+cal_is <- ls_calibrate(cal_ds, "Ca", 393.37, concentrations = conc,
+                       method = "internal_std",
+                       internal_std_nm = 589.00,
+                       verbose = FALSE)
+cal_is
+```
+
+### PLS calibration
+
+```{r pls, eval = requireNamespace("pls", quietly = TRUE)}
+cal_pls <- ls_calibrate(cal_ds, "Ca", 393.37, concentrations = conc,
+                        method = "pls", n_components = 5,
+                        verbose = FALSE)
+cal_pls
+```
+
+## Quantifying unknowns
+
+```{r quantify}
+ls_quantify(cal, cal_ds)
+```
+
+## LOD and LOQ
+
+```{r lod}
+ls_lod(cal)
+ls_loq(cal)
+```
+
+## Calibration-free LIBS (CF-LIBS)
+
+For semi-quantitative estimates without standards, use the Saha-Boltzmann
+method:
+
+```{r cf}
+spec <- ls_simulate_spectrum(
+  elements = c(Ca = 10000, Fe = 500, Na = 2000),
+  n_channels = 2048, seed = 7
+)
+spec <- ls_baseline(spec, method = "snip", iterations = 60)
+ls_saha_boltzmann(
+  spec, elements = c("Ca", "Fe"),
+  lines_nm = list(
+    Ca = c(422.673, 445.478, 487.813),
+    Fe = c(371.994, 404.581, 438.354)
+  ),
+  verbose = FALSE
+)
+```

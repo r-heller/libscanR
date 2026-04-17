@@ -1,0 +1,45 @@
+/* libscanR Shiny Theme */
+.navbar {
+  background-color: #1a1a2e !important;
+}
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #ffffff !important;
+}
+.navbar a.nav-link {
+  color: #d0d0e0 !important;
+}
+.navbar a.nav-link:hover {
+  color: #ffffff !important;
+}
+.nav-link.active {
+  color: #ffffff !important;
+  border-bottom: 3px solid #2E86AB !important;
+}
+.card {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 1rem;
+}
+.card-header {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+.btn-primary {
+  background-color: #2E86AB;
+  border-color: #2E86AB;
+}
+.btn-primary:hover {
+  background-color: #256e8d;
+  border-color: #256e8d;
+}
+.form-label {
+  font-weight: 500;
+}
+.libscanR-status {
+  padding: 0.75rem 1rem;
+  background: #eef3f6;
+  border-left: 4px solid #2E86AB;
+  border-radius: 4px;
+}
