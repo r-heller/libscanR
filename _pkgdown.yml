@@ -1,0 +1,137 @@
+url: https://r-heller.github.io/libscanR/
+
+template:
+  bootstrap: 5
+  bslib:
+    primary: "#2E86AB"
+    border-radius: 0.3rem
+
+navbar:
+  structure:
+    left:  [home, reference, articles, news]
+    right: [search, github]
+  components:
+    github:
+      icon: fa-github
+      href: https://github.com/r-heller/libscanR
+
+reference:
+  - title: "Package"
+    contents:
+      - libscanR-package
+
+  - title: "Import & Export"
+    contents:
+      - ls_read_spectrum
+      - ls_read_dir
+      - ls_read_csv
+      - ls_read_sciaps
+      - ls_read_aurora
+      - ls_read_auto
+      - ls_write_csv
+      - ls_export_spectra
+
+  - title: "Data Structures"
+    contents:
+      - ls_spectrum
+      - ls_dataset
+      - ls_calibration
+      - is_libs_spectrum
+      - is_libs_dataset
+      - is_libs_calibration
+
+  - title: "Preprocessing"
+    contents:
+      - ls_baseline
+      - ls_normalize
+      - ls_smooth
+      - ls_crop
+      - ls_average_shots
+      - ls_gate_optimize
+
+  - title: "Peak Analysis"
+    contents:
+      - ls_find_peaks
+      - ls_identify_peaks
+      - ls_peak_area
+      - ls_element_db
+
+  - title: "Calibration & Quantification"
+    contents:
+      - ls_calibrate
+      - ls_saha_boltzmann
+      - ls_quantify
+      - ls_lod
+      - ls_loq
+
+  - title: "Chemometrics"
+    contents:
+      - ls_pca
+      - ls_plsda
+      - ls_cluster
+      - ls_classify
+      - ls_train_classifier
+
+  - title: "Spatial Mapping"
+    contents:
+      - ls_build_map
+      - ls_map_elements
+
+  - title: "Tissue Analysis"
+    contents:
+      - ls_tissue_classify
+      - ls_tissue_discriminate
+
+  - title: "Visualization"
+    contents:
+      - ls_plot_spectrum
+      - ls_plot_overlay
+      - ls_plot_region
+      - ls_plot_calibration
+      - ls_plot_residuals
+      - ls_plot_map
+      - ls_plot_map_panel
+      - ls_plot_element_map
+      - ls_plot_pca
+      - ls_plot_loadings
+      - ls_plot_scree
+      - ls_plot_plsda
+      - theme_libs
+      - scale_color_wavelength
+
+  - title: "Shiny Application"
+    contents:
+      - ls_run_app
+
+  - title: "Example Data"
+    contents:
+      - ls_simulate_spectrum
+      - ls_example_data
+
+  - title: "S3 Methods"
+    contents:
+      - c.libs_spectrum
+      - dim.libs_dataset
+      - dim.libs_spectrum
+      - length.libs_dataset
+      - length.libs_spectrum
+      - plot.libs_dataset
+      - plot.libs_spectrum
+      - predict.libs_calibration
+      - print.libs_calibration
+      - print.libs_dataset
+      - print.libs_spectrum
+      - "[.libs_dataset"
+      - "[.libs_spectrum"
+      - summary.libs_calibration
+      - summary.libs_dataset
+      - summary.libs_spectrum
+
+articles:
+  - title: "Workflows"
+    contents:
+      - getting-started
+      - preprocessing-workflow
+      - calibration-quantification
+      - tissue-classification
+      - spatial-mapping

@@ -1,0 +1,68 @@
+---
+title: "Tissue Classification"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Tissue Classification}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 4.5,
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+```{r}
+library(libscanR)
+```
+
+## Example: 5 simulated tissue types
+
+```{r data}
+ds <- ls_example_data("tissue")
+table(ds$sample_info$tissue)
+```
+
+## Exploratory analysis with PCA
+
+```{r pca}
+pca <- ls_pca(ds, n_components = 4)
+ls_plot_pca(pca, color_by = "tissue")
+```
+
+```{r scree}
+ls_plot_scree(pca)
+```
+
+## Identifying discriminating elements
+
+```{r discr}
+d <- ls_tissue_discriminate(ds, "tissue",
+                            group_a = "bone",
+                            group_b = "muscle")
+head(d[!is.na(d$element) & d$significant, c("wavelength_nm",
+                                            "element",
+                                            "fold_change",
+                                            "fdr")], 15)
+```
+
+## PLS-DA classification
+
+```{r plsda, eval = requireNamespace("pls", quietly = TRUE)}
+plsda <- ls_plsda(ds, grouping = "tissue",
+                  n_components = 5, validation = "none")
+plsda
+ls_plot_plsda(plsda, type = "confusion")
+```
+
+## Rule-based classification with elemental ratios
+
+```{r ratio}
+ls_tissue_classify(ds[1:10], method = "ratio")
+```
