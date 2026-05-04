@@ -1,6 +1,7 @@
 # Calibration and Quantification
 
 ``` r
+
 library(libscanR)
 ```
 
@@ -12,6 +13,7 @@ elemental concentration using a set of matrix-matched standards.
 ### Synthetic calibration dataset
 
 ``` r
+
 cal_ds <- ls_example_data("calibration")
 cal_ds
 conc <- cal_ds$sample_info$concentration
@@ -22,6 +24,7 @@ unique(conc)
 ### Univariate calibration
 
 ``` r
+
 cal <- ls_calibrate(cal_ds, element = "Ca", line_nm = 393.37,
                     concentrations = conc, method = "univariate",
                     verbose = FALSE)
@@ -31,6 +34,7 @@ cal
 ### Visualize
 
 ``` r
+
 ls_plot_calibration(cal)
 ```
 
@@ -39,6 +43,7 @@ ls_plot_calibration(cal)
 ### Residual diagnostics
 
 ``` r
+
 ls_plot_residuals(cal)
 ```
 
@@ -49,6 +54,7 @@ ls_plot_residuals(cal)
 When matrix effects are significant, normalize to a reference line:
 
 ``` r
+
 cal_is <- ls_calibrate(cal_ds, "Ca", 393.37, concentrations = conc,
                        method = "internal_std",
                        internal_std_nm = 589.00,
@@ -59,6 +65,7 @@ cal_is
 ### PLS calibration
 
 ``` r
+
 cal_pls <- ls_calibrate(cal_ds, "Ca", 393.37, concentrations = conc,
                         method = "pls", n_components = 5,
                         verbose = FALSE)
@@ -68,6 +75,7 @@ cal_pls
 ## Quantifying unknowns
 
 ``` r
+
 ls_quantify(cal, cal_ds)
 #> # A tibble: 27 × 6
 #>    sample_id    element concentration unit  below_lod below_loq
@@ -88,6 +96,7 @@ ls_quantify(cal, cal_ds)
 ## LOD and LOQ
 
 ``` r
+
 ls_lod(cal)
 #> [1] 3.957456
 ls_loq(cal)
@@ -100,6 +109,7 @@ For semi-quantitative estimates without standards, use the
 Saha-Boltzmann method:
 
 ``` r
+
 spec <- ls_simulate_spectrum(
   elements = c(Ca = 10000, Fe = 500, Na = 2000),
   n_channels = 2048, seed = 7

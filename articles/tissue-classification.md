@@ -1,12 +1,14 @@
 # Tissue Classification
 
 ``` r
+
 library(libscanR)
 ```
 
 ## Example: 5 simulated tissue types
 
 ``` r
+
 ds <- ls_example_data("tissue")
 table(ds$sample_info$tissue)
 #> 
@@ -17,6 +19,7 @@ table(ds$sample_info$tissue)
 ## Exploratory analysis with PCA
 
 ``` r
+
 pca <- ls_pca(ds, n_components = 4)
 ls_plot_pca(pca, color_by = "tissue")
 ```
@@ -24,6 +27,7 @@ ls_plot_pca(pca, color_by = "tissue")
 ![](tissue-classification_files/figure-html/pca-1.png)
 
 ``` r
+
 ls_plot_scree(pca)
 ```
 
@@ -32,6 +36,7 @@ ls_plot_scree(pca)
 ## Identifying discriminating elements
 
 ``` r
+
 d <- ls_tissue_discriminate(ds, "tissue",
                             group_a = "bone",
                             group_b = "muscle")
@@ -60,6 +65,7 @@ head(d[!is.na(d$element) & d$significant, c("wavelength_nm",
 ## PLS-DA classification
 
 ``` r
+
 plsda <- ls_plsda(ds, grouping = "tissue",
                   n_components = 5, validation = "none")
 plsda
@@ -71,6 +77,7 @@ ls_plot_plsda(plsda, type = "confusion")
 ## Rule-based classification with elemental ratios
 
 ``` r
+
 ls_tissue_classify(ds[1:10], method = "ratio")
 #> # A tibble: 10 × 3
 #>    sample_id predicted_tissue confidence

@@ -37,6 +37,7 @@ applications.
 ## Installation
 
 ``` r
+
 # install.packages("remotes")
 remotes::install_github("r-heller/libscanR")
 ```
@@ -44,6 +45,7 @@ remotes::install_github("r-heller/libscanR")
 ## Quick start
 
 ``` r
+
 library(libscanR)
 
 # Generate a synthetic spectrum
@@ -80,6 +82,7 @@ ls_run_app(data = ls_example_data("tissue"))
 ## Citation
 
 ``` r
+
 citation("libscanR")
 ```
 

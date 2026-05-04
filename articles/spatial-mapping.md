@@ -1,12 +1,14 @@
 # Spatial Elemental Mapping
 
 ``` r
+
 library(libscanR)
 ```
 
 ## Raster scan dataset
 
 ``` r
+
 ds <- ls_example_data("spatial")
 ds
 ```
@@ -20,6 +22,7 @@ The simulated tissue section has:
 ## Build a single elemental map
 
 ``` r
+
 m_ca <- ls_build_map(ds, "Ca", 393.37)
 ls_plot_map(m_ca)
 ```
@@ -29,6 +32,7 @@ ls_plot_map(m_ca)
 ## Multi-element panel
 
 ``` r
+
 maps <- ls_map_elements(ds, c("Ca", "Fe", "Zn"),
                         c(Ca = 393.37, Fe = 371.99, Zn = 213.86))
 ls_plot_map_panel(maps)
@@ -39,6 +43,7 @@ ls_plot_map_panel(maps)
 ## Applying a calibration to the map
 
 ``` r
+
 cal_ds <- ls_example_data("calibration")
 cal <- ls_calibrate(cal_ds, "Ca", 393.37,
                     concentrations = cal_ds$sample_info$concentration,
@@ -52,6 +57,7 @@ ls_plot_map(m_cal)
 ## Hotspot detection
 
 ``` r
+
 zn <- ls_build_map(ds, "Zn", 213.86)
 hot_idx <- which(zn$values > stats::quantile(zn$values, 0.9))
 head(data.frame(x = zn$x[hot_idx],

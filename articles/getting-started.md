@@ -1,6 +1,7 @@
 # Getting Started with libscanR
 
 ``` r
+
 library(libscanR)
 ```
 
@@ -26,6 +27,7 @@ instrument data.
 ### Simulate a spectrum
 
 ``` r
+
 spec <- ls_simulate_spectrum(
   elements = c(Ca = 5000, Na = 1000, Fe = 200),
   n_channels = 1024,
@@ -42,6 +44,7 @@ spec
 ### Plot it
 
 ``` r
+
 ls_plot_spectrum(spec, show_elements = c("Ca", "Na"))
 ```
 
@@ -50,6 +53,7 @@ ls_plot_spectrum(spec, show_elements = c("Ca", "Na"))
 ### Preprocess: baseline, smooth, normalize
 
 ``` r
+
 spec_proc <- spec |>
   ls_baseline(method = "snip", iterations = 40) |>
   ls_smooth(method = "moving_avg", window = 5) |>
@@ -62,6 +66,7 @@ ls_plot_spectrum(spec_proc)
 ### Detect and identify peaks
 
 ``` r
+
 peaks <- ls_find_peaks(spec_proc, snr_threshold = 3)
 id <- ls_identify_peaks(peaks, elements = c("Ca", "Na", "Fe"))
 head(id[, c("wavelength_nm", "element", "ionization", "nist_aki", "confidence")])
@@ -79,6 +84,7 @@ head(id[, c("wavelength_nm", "element", "ionization", "nist_aki", "confidence")]
 ### Read from a file
 
 ``` r
+
 tmp <- tempfile(fileext = ".csv")
 utils::write.csv(
   data.frame(wavelength = spec$wavelength,
@@ -91,13 +97,14 @@ spec_in
 #> <libs_spectrum>
 #> • Range: 200-900 nm (1024 channels)
 #> • Shots: 1
-#> • Sample: "file204e33286393"
+#> • Sample: "file201c2c1954c6"
 #> • Baseline corrected: FALSE
 ```
 
 ### Use example datasets
 
 ``` r
+
 ds <- ls_example_data("tissue")
 summary(ds)
 #> <libs_dataset> summary

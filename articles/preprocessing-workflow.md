@@ -1,6 +1,7 @@
 # Preprocessing Workflow
 
 ``` r
+
 library(libscanR)
 ```
 
@@ -16,6 +17,7 @@ Four methods are supported: `snip`, `als`, `rolling_ball`, `linear`,
 removal.
 
 ``` r
+
 spec <- ls_simulate_spectrum(
   elements = c(Ca = 5000, Na = 1000, K = 800, Fe = 200),
   n_channels = 1024, seed = 1
@@ -46,6 +48,7 @@ ggplot2::ggplot(df, ggplot2::aes(w, y, colour = method)) +
 Five options:
 
 ``` r
+
 norm_total <- ls_normalize(snip, method = "total")
 cat("sum after total normalization:",
     round(sum(norm_total$intensity[1, ]), 2), "\n")
@@ -57,6 +60,7 @@ norm_is <- ls_normalize(snip, method = "internal_std", ref_wavelength = 589)
 ## Smoothing
 
 ``` r
+
 sm <- ls_smooth(snip, method = "moving_avg", window = 7)
 ls_plot_region(sm, 380, 410)
 ```
@@ -66,6 +70,7 @@ ls_plot_region(sm, 380, 410)
 ## Averaging replicate shots with outlier removal
 
 ``` r
+
 multi <- ls_simulate_spectrum(seed = 1, n_channels = 512, n_shots = 20,
                               noise_level = 0.05)
 avg <- ls_average_shots(multi, remove_outliers = TRUE)
@@ -76,6 +81,7 @@ avg$n_shots
 ## Cropping
 
 ``` r
+
 ca_region <- ls_crop(snip, 380, 450)
 ls_plot_spectrum(ca_region, show_elements = "Ca")
 ```
@@ -85,6 +91,7 @@ ls_plot_spectrum(ca_region, show_elements = "Ca")
 ## Recommended pipeline
 
 ``` r
+
 processed <- spec |>
   ls_baseline(method = "snip", iterations = 60) |>
   ls_smooth(method = "moving_avg", window = 5) |>
